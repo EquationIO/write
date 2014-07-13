@@ -1,4 +1,3 @@
-'use strict';
 
 var MathQuill = window.MathQuill;
 
@@ -25,6 +24,7 @@ function MathField() {
       return;
     }
     ctrl.$viewValue = value;
+    if (ctrl.onchange) ctrl.onchange.call(ctrl);
   }
 
   function deleteOutOf() {
@@ -59,63 +59,12 @@ MathField.prototype.setLatex = function (latex) {
 MathField.prototype.present = function (container) {
   container.appendChild(this.element);
 };
+MathField.prototype.latex = function () {
+  return new MathQuill(this.element).latex();
+};
 MathField.prototype.focus = function () {
   var field = new MathQuill(this.element);
   setTimeout(function () {
     field.focus();
   }, 0);
 };
-
-var list = document.createElement('ul');
-
-var lines = [];
-
-function add(sibling) {
-  var item = document.createElement('li');
-  item.classList.add('item');
-  var f = new MathField();
-  f.onenter = function () {
-    add(item);
-  };
-  f.ondelete = function () {
-    var index = lines.indexOf(f);
-    if (index === 0) return;
-    lines.splice(index, 1);
-    list.removeChild(item);
-    lines[index-1].focus();
-  };
-  f.ondown = function () {
-    var next = item.nextSibling;
-    if (!next) return;
-    var n = MathField.find(next.firstChild);
-    n.focus();
-  };
-  f.onup = function () {
-    var prev = item.previousSibling;
-    if (!prev) return;
-    var n = MathField.find(prev.firstChild);
-    n.focus();
-  };
-  f.present(item);
-  f.focus();
-  if (sibling) {
-    insertAfter(sibling, item);
-  } else {
-    list.appendChild(item);
-  }
-  lines.push(f);
-}
-
-function insertAfter(sibling, child) {
-  if (sibling.nextSibling) {
-    sibling.parentNode.insertBefore(child, sibling.nextSibling);
-  } else {
-    sibling.parentNode.appendChild(child);
-  }
-}
-
-var main = document.getElementById('main');
-
-main.appendChild(list);
-
-add();
