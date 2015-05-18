@@ -9,6 +9,22 @@
   <!--<script src="https://www.dropbox.com/static/api/dropbox-datastores-1.0-latest.js" type="text/javascript"></script>-->
 </head>
 <body>
+<div id="welcome" style="display: none">
+  <div class="modal">
+    <h1>Equation.IO Writer</h1>
+    <p>Traditionally, one would write their formulas on thin flexible sheets of cellulose pulp, commonly referred to as paper.</p>
+
+  <p>That is no longer necessary.</p>
+
+  <p>Presenting <emph>Equation.IO Writer</emph> - the best way to math.</p>
+
+  <button id="welcomedone">OK</button>
+  <small class="small-notice">
+  Equation.IO Writer is a product of <a target="_blank" href="http://equation.io">Equation.IO</a><br />
+
+  Free software under MIT License. <a target="_blank" href="https://github.com/EquationIO/write">Fork on GitHub</a><br />Powered by <a target="_blank" href="https://github.com/mathquill/mathquill">MathQuill</a>.</small>
+  </div>
+</div>
 <div id="header">
   <div class="content">
     <h1><input id="doc_title" type="text" placeholder="Untitled Document" /></h1>
@@ -19,7 +35,8 @@
         <dropdown>
           <div id="documents-list">
           </div>
-          <li value="new" class="new">+<br /><br />Create new</li>
+          <li style="border-top: 1px solid #ccc" value="about">About</li>
+          <li value="new" class="new last-item">+<br /><br />Create new</li>
         </ul>
       </dropdown>
     </div>

@@ -5,6 +5,9 @@ function Document() {
   this.lines = [];
 }
 
+/** @type {Boolean} if true, doc.add() will call doc.focus() */
+Document.prototype.shouldFocusAutomatically = true;
+
 Document.prototype.serialize = function () {
   return {
     _id: this._id,
@@ -58,14 +61,16 @@ Document.prototype.add = function (contents, sibling) {
     if (doc.onchange) doc.onchange.call(doc);
   };
   f.present(item);
-  f.focus();
+  if (this.shouldFocusAutomatically) {
+    f.focus();    
+  }
   if (sibling) {
     insertAfter(sibling, item);
   } else {
     doc.list.appendChild(item);
   }
+  
   doc.lines.push(f);
-
 
   if (contents && contents.latex) {
     f.setLatex(contents.latex);

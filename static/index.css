@@ -11,20 +11,82 @@ body {
   color: #333;
   font-size: 30px;
 }
+.mq-editable-field,
+.mq-math-mode .mq-editable-field {
+  border: none;
+}
 
-.mathquill-editable.hasCursor, .mathquill-editable .hasCursor {
+.mq-editable-field.mq-focused,
+.mq-math-mode .mq-editable-field.mq-focused {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
+  border: none;
+  border-radius: 0;
 }
 
-.mathquill-editable .mathquill-root-block, .mathquill-embedded-latex .mathquill-editable .mathquill-root-block {
-  border: none;
-  padding: 2px;
+.mq-editable-field .mq-cursor {
+  border-left: 3px solid #09f !important;
+  margin-right: -3px !important;
 }
 
 body {
 
+}
+
+#welcome {
+  background: rgba(0,0,0,0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  font-size: 0.6em;
+}
+#welcome .modal h1 {
+  margin: 0;
+  margin-bottom: 1em;
+}
+#welcome .modal {
+  background: white;
+  width: 50%;
+  margin: auto;
+  padding: 5%;
+  margin-top: 20px;
+  max-width: 700px;
+  font-family: 'Trebuchet MS';
+  box-shadow: 0px 3px 35px rgba(0,0,0,0.4);
+}
+#welcomedone {
+  border: 1px solid #ccc;
+  background: #f8f8f8;
+  padding: 10px 20px;
+  font-family: 'Lucida Grande', sans-serif;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+#welcomedone:hover {
+  background: #fff;
+}
+#welcome .modal emph {
+  font-family: 'Helvetica';
+  font-weight: bold;
+  font-style: italic;
+}
+#welcome .small-notice {
+  position: absolute;
+  padding: 32px;
+  font-size: 12px;
+  font-family: Helvetica;
+  text-align: right;
+  bottom: 0;
+  right: 0;
+  line-height: 1.8em;
+}
+#welcome .small-notice a {
+  color: black;
 }
 
 #header .content, #main {
@@ -45,7 +107,7 @@ li.item {
   display: block;
 }
 li.item:last-child mathquill{
-  padding-bottom: 8em;
+  padding-bottom: 12em;
 }
 mathquill {
   width: 100%;
@@ -120,13 +182,6 @@ a:link {
   text-shadow: 0px 2px 3px black;
 }
 
-
-mathquill .cursor {
-  border-left: 3px solid #09f !important;
-  margin-right: -3px !important;
-}
-
-
 popdown {
   position: relative;
   display: block;
@@ -176,7 +231,7 @@ dropdown li:first-child {
   border-top-left-radius: 6px;
 }
 
-dropdown li:last-child {
+dropdown li.last-item {
   border-bottom-right-radius: 6px;
   border-bottom-left-radius: 6px;
 }
